@@ -1,7 +1,7 @@
 <?php
 /** @var yii\web\View $this */
 use yii\helpers\Html;
-use basic\modules\takedatam\assets\AppAsset;
+use app\modules\takedatam\assets\AppAsset;
 AppAsset::register($this);
 $this->registerJsFile('//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js');
 $this->registerJsFile('@modulestakedatamscript/form2.js');

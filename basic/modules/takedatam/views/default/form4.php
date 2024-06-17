@@ -1,6 +1,6 @@
 <?php
 /** @var yii\web\View $this */
-use basic\modules\takedatam\assets\AppAsset;
+use app\modules\takedatam\assets\AppAsset;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 

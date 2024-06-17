@@ -3,7 +3,7 @@
 /** @var yii\web\View $this */
 
 use yii\helpers\Html;
-use basic\modules\takedatam\assets\AppAsset;
+use app\modules\takedatam\assets\AppAsset;
 AppAsset::register($this);
 $this->registerCssFile('@modulestakedatamcss/index.css');
 ?>

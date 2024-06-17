@@ -12,6 +12,9 @@ $config = [
         '@npm'   => '@vendor/npm-asset',
     ],
     'components' => [
+        'assetManager' => [
+            'linkAssets' => true,
+        ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'gqsfyaths0Aiv2_rGdNBmx53gWVp1Ujv',
@@ -53,6 +56,9 @@ $config = [
                 'form2'=>'takedatam/default/form2',
                 'form3'=>'takedatam/default/form3',
                 'form4'=>'takedatam/default/form4',
+                'document' => 'takedatam/default/document',
+                'paidedu' => 'takedatam/default/paidedu',
+                'grants' => 'takedatam/default/grants',
                 'testmodule1' => 'testmodule/<controller>/<action>'
             ],
         ],
@@ -61,7 +67,10 @@ $config = [
     'modules' => [
         'testmodule' => [
             'class' => 'app\modules\testmodule\Module',
-        ]
+        ],
+        'takedatam' => [
+            'class' => 'app\modules\takedatam\Module',
+        ],
     ],
     'params' => $params,
 ];

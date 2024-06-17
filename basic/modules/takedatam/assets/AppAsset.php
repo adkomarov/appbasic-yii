@@ -2,13 +2,13 @@
 /*
  * Файл assets/AppAsset.php
  */
-namespace basic\modules\takedatam\assets;
+namespace app\modules\takedatam\assets;
 use yii\web\AssetBundle;
 use yii\web\View;
 
 class AppAsset extends AssetBundle
 {
-    public $sourcePath="@modulestakedatamroot";
+    public $sourcePath="/work/sites/yiiprojects/appbasic/basic/modules/takedatam/public/";
     public $basePath = '@webroot/assets';
     public $baseUrl = '@web/assets';
     public $css = [
@@ -23,6 +23,6 @@ class AppAsset extends AssetBundle
     ];
     public $depends = [
         'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
+        'yii\bootstrap5\BootstrapAsset',
     ];
 }

@@ -1,5 +1,5 @@
 <?php
-namespace basic\modules\takedatam\models;
+namespace app\modules\takedatam\models;
 
 use yii\base\Model;
 use yii\web\UploadedFile;
