@@ -462,26 +462,37 @@ class DefaultController extends Controller
         $secret = Yii::$app->params['secret'];
         $endpoint = Yii::$app->params['endpoint'];
         $bucket = Yii::$app->params['Bucket'];
-        //массив с разрешенными расширениями файлов
+        
+        // Массив с разрешенными расширениями файлов
         $acTypesFileForUploading = array(
-            "image/jpeg",//jpg or jpeg
-            "image/png",//png
-            "application/pdf",//pdf
-            "application/msword",//doc (not docx)
-            "application/vnd.ms-excel",//xls (not xlsx)
-            "text/csv",//csv
-            //"application/vnd.openxmlformats-officedocument.wordprocessingml.document",//docx
-            //"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",//xlsx
-            //"application/vnd.ms-powerpoint",//ppt
-            //"application/vnd.openxmlformats-officedocument.presentationml.presentation",//pptx
+            "image/jpeg",    // jpg or jpeg
+            "image/png",     // png
+            "application/pdf",  // pdf
+            "application/msword",  // doc (not docx)
+            "application/vnd.ms-excel",  // xls (not xlsx)
+            "text/csv",     // csv
+            // Дополнительные типы файлов можно раскомментировать по необходимости
+            // "application/vnd.openxmlformats-officedocument.wordprocessingml.document",  // docx
+            // "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",  // xlsx
+            // "application/vnd.ms-powerpoint",  // ppt
+            // "application/vnd.openxmlformats-officedocument.presentationml.presentation",  // pptx
         );
+
         if (isset($_FILES['document'])) {
-            $savefilestable = Savefiles::find()->all();
             foreach ($_FILES['document']['name'] as $file => $name) {
                 $p = 0;
-                if ($name != '') {
+                // Проверка наличия файла и текста назначения
+                if ($name != '' && $request->post('document')[$file][2] != '') {
+                    $testMimeType = FileHelper::getMimeTypeByExtension($name);
+
+                    // Проверка валидности типа файла
+                    if (!in_array($testMimeType, $acTypesFileForUploading)) {
+                        Yii::$app->session->setFlash('error', 'Недопустимый формат файла. Разрешенные форматы: jpg, png, pdf, doc, xls, csv.');
+                        continue; // переход к следующему файлу в цикле
+                    }
+
                     foreach ($savefilestable as $data) {
-                        //Поиск записи и её перезапись
+                        // Поиск записи и её перезапись
                         if ($request->post('document')[$file][0] == $data['Position']) {
                             $s3 = new S3Client([
                                 'version' => 'latest',
@@ -493,42 +504,43 @@ class DefaultController extends Controller
                                 ],
                                 'endpoint' => $endpoint,
                             ]);
+
                             $position = $data['Position'];
-                            $testMimeType = FileHelper::getMimeTypeByExtension($name);
-                            //Проверка, что расширение файла разрешено
-                            if (in_array($testMimeType, $acTypesFileForUploading)) {
-                                $s3->putObject([
-                                    'Bucket' => $bucket,
-                                    'Key' => $position,
-                                    'Body' => file_get_contents($_FILES['document']['tmp_name'][$file]),
-                                    'ContentDisposition' => '"inline"',
-                                    'ContentType' => $testMimeType
-                                ]);
-                                $s3->listBuckets();
-                                $command = $s3->getCommand('GetObject', [
-                                    'Bucket' => $bucket,
-                                    'Key' => $position
-                                ]);
-                                $myPresignedRequest = $s3->createPresignedRequest($command, '+1000 minutes');
-                                $presignedUrl = (string) $myPresignedRequest->getUri(); //получили актуальную ссылку
-                                $lastdotposition = strpos($presignedUrl, "?");
-                                if ($lastdotposition !== false) {
-                                    $link = substr($presignedUrl, 0, $lastdotposition);
-                                }
-                            } else {
-                                $link = "Загрузка не удалась, проверьте тип фалйа";
+
+                            // Загрузка файла в S3
+                            $s3->putObject([
+                                'Bucket' => $bucket,
+                                'Key' => $position,
+                                'Body' => file_get_contents($_FILES['document']['tmp_name'][$file]),
+                                'ContentDisposition' => '"inline"',
+                                'ContentType' => $testMimeType
+                            ]);
+
+                            // Получение пресайндованной ссылки
+                            $command = $s3->getCommand('GetObject', [
+                                'Bucket' => $bucket,
+                                'Key' => $position
+                            ]);
+                            $myPresignedRequest = $s3->createPresignedRequest($command, '+1000 minutes');
+                            $presignedUrl = (string) $myPresignedRequest->getUri();
+                            $lastdotposition = strpos($presignedUrl, "?");
+                            if ($lastdotposition !== false) {
+                                $link = substr($presignedUrl, 0, $lastdotposition);
                             }
-                            //Сохранение в бд
+
+                            // Сохранение в базу данных
                             $saveintable = Savefiles::findOne($data["idsavefiles"]);
                             $saveintable->Titel = $request->post('document')[$file][2];
                             $saveintable->NameFile = $request->post('document')[$file][1];
                             $saveintable->Link = $link;
                             $saveintable->save();
+
                             $p = 1;
                             break;
                         }
                     }
-                    //Первое сохранения файла
+
+                    // Первое сохранение файла, если запись не найдена
                     if ($p == 0) {
                         $s3 = new S3Client([
                             'version' => 'latest',
@@ -540,33 +552,32 @@ class DefaultController extends Controller
                             ],
                             'endpoint' => $endpoint,
                         ]);
+
                         $randomString = Yii::$app->getSecurity()->generateRandomString();
                         $position = trim($randomString, "_-");
-                        $testMimeType = FileHelper::getMimeTypeByExtension($name);
-                        //Проверка, что расширение файла разрешено
-                        if (in_array($testMimeType, $acTypesFileForUploading)) {
-                            $s3->putObject([
-                                'Bucket' => $bucket,
-                                'Key' => $position,
-                                'Body' => file_get_contents($_FILES['document']['tmp_name'][$file]),
-                                'ContentDisposition' => '"inline"',
-                                'ContentType' => $testMimeType
-                            ]);
-                            $s3->listBuckets();
-                            $command = $s3->getCommand('GetObject', [
-                                'Bucket' => $bucket,
-                                'Key' => $position
-                            ]);
-                            $myPresignedRequest = $s3->createPresignedRequest($command, '+1000 minutes');
-                            $presignedUrl = (string) $myPresignedRequest->getUri(); //получили актуальную ссылку
-                            $lastdotposition = strpos($presignedUrl, "?");
-                            if ($lastdotposition !== false) {
-                                $link = substr($presignedUrl, 0, $lastdotposition);
-                            }
-                        } else {
-                            $link = "Загрузка не удалась, проверьте тип фалйа";
+
+                        // Загрузка файла в S3
+                        $s3->putObject([
+                            'Bucket' => $bucket,
+                            'Key' => $position,
+                            'Body' => file_get_contents($_FILES['document']['tmp_name'][$file]),
+                            'ContentDisposition' => '"inline"',
+                            'ContentType' => $testMimeType
+                        ]);
+
+                        // Получение ссылки
+                        $command = $s3->getCommand('GetObject', [
+                            'Bucket' => $bucket,
+                            'Key' => $position
+                        ]);
+                        $myPresignedRequest = $s3->createPresignedRequest($command, '+1000 minutes');
+                        $presignedUrl = (string) $myPresignedRequest->getUri();
+                        $lastdotposition = strpos($presignedUrl, "?");
+                        if ($lastdotposition !== false) {
+                            $link = substr($presignedUrl, 0, $lastdotposition);
                         }
-                        //Сохранение в бд
+
+                        // Сохранение в базу данных
                         $saveintable = new Savefiles();
                         $saveintable->Titel = $request->post('document')[$file][2];
                         $saveintable->NameFile = $request->post('document')[$file][1];
@@ -575,30 +586,16 @@ class DefaultController extends Controller
                         $saveintable->save();
                     }
                 } else {
-                    foreach ($savefilestable as $data) {
-                        if ($request->post('document')[$file][0] == $data['Position']) {
-                            $saveintable = Savefiles::findOne($data["idsavefiles"]);
-                            $saveintable->Titel = $request->post('document')[$file][2];
-                            $saveintable->save();
-                            $p = 1;
-                            break;
-                        }
-                    }
-                    //Сохранение в бд только назначения файла, если пользователь не выбрал файл
-                    if ($p == 0) {
-                        $randomString = Yii::$app->getSecurity()->generateRandomString();
-                        $position = trim($randomString, "_-");
-                        $saveintable = new Savefiles();
-                        $saveintable->Titel = $request->post('document')[$file][2];
-                        $saveintable->NameFile = $request->post('document')[$file][1];
-                        $saveintable->Position = $position;
-                        $saveintable->save();
-                    }
+                    // Обработка ошибок, если название файла или текст назначения не указаны
+                    Yii::$app->session->setFlash('error', 'Поле "назначение файла" не может быть пустым.');
                 }
             }
+
             $savefilestable = Savefiles::find()->all();
             return $this->redirect('document');
         }
+
+
         return $this->render('document', ['tabledata' => $savefilestable]);
     }
 
