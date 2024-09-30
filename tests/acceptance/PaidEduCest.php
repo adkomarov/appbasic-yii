@@ -19,13 +19,13 @@ class PaidEduCest
      * @var \FunctionalTester
      */
 
-    public string $urlRoute = '/takedatam/default/paidedu';
+    public string $urlRoute = '/specialsection/section/paidedu';
 
     protected $tester;
 
     public function _before(AcceptanceTester $I)
     {
-        $I->amOnPage(Url::toRoute($this->urlRoute));//'/takedatam/default/paidedu'
+        $I->amOnPage(Url::toRoute($this->urlRoute));
     }
 
     #protected function _before(AcceptanceTester $I)
@@ -37,61 +37,112 @@ class PaidEduCest
     {
     }
     
-    public function testPaideduAction(AcceptanceTester $I)
+    public function testPaidEduTextOnPage(AcceptanceTester $I)
     {
         $I->amOnPage($this->urlRoute);
-        $I->see('Платные образовательные услуги');
+        $I->see('Образовательные стандарты и требования');
         $I->see('Образец договора об оказании платных образовательных услуг');
-        $I->see('Документ об утверждении стоимости обучения по каждой образовательной программе');
-        $I->see('Документ о порядке оказания платных образовательных услуг');
-        $I->see('Документ об установлении размера платы, взимаемой с родителей (законных представителей) за присмотр и уход за детьми, осваивающими образовательные программы дошкольного образования в организациях, осуществляющих образовательную деятельность, за содержание детей в образовательной организации, реализующей образовательные программы начального общего, основного общего или среднего общего образования, если в такой образовательной организации созданы условия для проживания обучающихся в интернате, либо за осуществление присмотра и ухода за детьми в группах продленного дня в образовательной организации, реализующей образовательные программы начального общего, основного общего или среднего общего образования');
+        $I->see('Документ об утверждении стоимости обучения по каждой образовательной программе в виде электронного документа, подписанного электронной подписью');
+        $I->see('Порядок оказания платных образовательных услуг в виде электронного документа, подписанного электронной подписью');
+        $I->see('Документ об установлении размера платы, взимаемой с родителей (законных представителей) за присмотр и уход за детьми, осваивающими образовательные программы дошкольного образования в организациях, осуществляющих образовательную деятельность, за содержание детей в образовательной организации, реализующей образовательные программы начального общего, основного общего или среднего общего образования, если в такой образовательной организации созданы условия для проживания обучающихся в интернате, либо за осуществление присмотра и ухода за детьми в группах продленного дня в образовательной организации, реализующей образовательные программы начального общего, основного общего или среднего общего образования в виде электронного документа, подписанного электронной подписью');
     }
 
 
     public function submitValidData(AcceptanceTester $I)
     {
-        //мы на странице
         $I->amOnPage($this->urlRoute);
 
+        $xpathTextSampleContract = '//*[@id="main"]/div/form/div[1]/div[1]/input';
+        $xpathDocSampleContract = '//*[@id="File0"]';
 
-        //подготовили данные для заполнения
+        $xpathTextApprovalDocument = '//*[@id="main"]/div/form/div[3]/div[1]/input';
+        $xpathDocApprovalDocument  = '//*[@id="File1"]';
 
-        $xpathTestNameForUrl1 = '//*[@id="main"]/div/form/div[1]/div[1]/input[1]';
-        $xpathTestUrl1 = '//*[@id="main"]/div/form/div[1]/div[1]/input[2]';
-        $xpathTestNameForUrl2 = '//*[@id="main"]/div/form/div[3]/div[1]/input[1]';
-        $xpathTestUrl2 = '//*[@id="main"]/div/form/div[3]/div[1]/input[2]';
+        $xpathTextDeliveryProcedure = '//*[@id="main"]/div/form/div[5]/div[1]/input';
+        $xpathDocDeliveryProcedure = '//*[@id="File2"]';
 
-        $testNameForUrl1 = 'php-webdriver';
-        $testUrl1 = 'https://github.com/php-webdriver/php-webdriver?tab=readme-ov-file';
-        $testNameForUrl2 = 'ai deepseek';
-        $testUrl2 = 'https://chat.deepseek.com/coder';
-        $testNameForUrl3 = 'deepl translate';
-        $testUrl3 = 'https://www.deepl.com/ru/translator';
-
-        $textNameForUrl = 'Название для ссылки';
-        $textUrl = 'Ссылка';
+        $xpathTextEstablishmentDocument = '//*[@id="main"]/div/form/div[7]/div[1]/input';
+        $xpathDocEstablishmentDocument = '//*[@id="File3"]';
+        
+        $textSampleContract1 = 'Образец договора об оказании платных образовательных услуг (версия 1)';
+        $textApprovalDocument1 = 'Документ об утверждении стоимости обучения по каждой образовательной программе в виде электронного документа, подписанного электронной подписью (версия 1)';
+        $textDeliveryProcedure1 = 'Порядок оказания платных образовательных услуг в виде электронного документа, подписанного электронной подписью (версия 1)';
+        $textEstablishmentDocument1 = 'Документ об установлении размера платы, взимаемой с родителей (законных представителей) за присмотр и уход за детьми, осваивающими образовательные программы дошкольного образования в организациях, осуществляющих образовательную деятельность, за содержание детей в образовательной организации, реализующей образовательные программы начального общего, основного общего или среднего общего образования, если в такой образовательной организации созданы условия для проживания обучающихся в интернате, либо за осуществление присмотра и ухода за детьми в группах продленного дня в образовательной организации, реализующей образовательные программы начального общего, основного общего или среднего общего образования в виде электронного документа, подписанного электронной подписью (версия 1)';
+        
+        $textSampleContract2 = 'Образец договора об оказании платных образовательных услуг (версия 2)';
+        $textApprovalDocument2 = 'Документ об утверждении стоимости обучения по каждой образовательной программе в виде электронного документа, подписанного электронной подписью (версия 2)';
+        $textDeliveryProcedure2 = 'Порядок оказания платных образовательных услуг в виде электронного документа, подписанного электронной подписью (версия 2)';
+        $textEstablishmentDocument2 = 'Документ об установлении размера платы, взимаемой с родителей (законных представителей) за присмотр и уход за детьми, осваивающими образовательные программы дошкольного образования в организациях, осуществляющих образовательную деятельность, за содержание детей в образовательной организации, реализующей образовательные программы начального общего, основного общего или среднего общего образования, если в такой образовательной организации созданы условия для проживания обучающихся в интернате, либо за осуществление присмотра и ухода за детьми в группах продленного дня в образовательной организации, реализующей образовательные программы начального общего, основного общего или среднего общего образования в виде электронного документа, подписанного электронной подписью (версия 2)';
+        
+        $textCommentDoc = 'Назначение докумета';
+        $textUploadDoc = 'Документ для загрузки';
 
         $elementButtonSave = '#main > div > form > div.form-group > button:nth-child(1)';
-
-        $listXpath = [$xpathTestNameForUrl1,$xpathTestUrl1,$xpathTestNameForUrl2,$xpathTestUrl2,$elementButtonSave];
+        
+        $listXpath = [
+            $xpathTextSampleContract,
+            $xpathDocSampleContract,
+            $xpathTextApprovalDocument,
+            $xpathDocApprovalDocument,
+            $xpathTextDeliveryProcedure,
+            $xpathDocDeliveryProcedure,
+            $xpathTextEstablishmentDocument,
+            $xpathDocEstablishmentDocument,
+            $textSampleContract1,
+            $textApprovalDocument1,
+            $textDeliveryProcedure1,
+            $textEstablishmentDocument1,
+            $textSampleContract2,
+            $textApprovalDocument2,
+            $textDeliveryProcedure2,
+            $textEstablishmentDocument2,
+            $textCommentDoc,
+            $textUploadDoc,
+            $elementButtonSave];
         $uniqueListXpath = array_unique($listXpath);
         Assert::assertSame(count($listXpath), count($uniqueListXpath), "Список содержит повторяющиеся значения.");
+
+        $I->click(['xpath' => '/html/body/main/div/form/div[1]/button']);
+        $I->click(['xpath' => '/html/body/main/div/form/div[2]/button']);
+        $I->click(['xpath' => '/html/body/main/div/form/div[3]/button']);
+        $I->click(['xpath' => '/html/body/main/div/form/div[4]/button']);
+
+        $I->see($textCommentDoc);
+        $I->see($textUploadDoc);
+
+        $I->fillField(['xpath' => $xpathTextSampleContract], $textSampleContract1);
+        $I->fillField(['xpath' => $xpathTextApprovalDocument], $textApprovalDocument1);
+        $I->fillField(['xpath' => $xpathTextDeliveryProcedure], $textDeliveryProcedure1);
+        $I->fillField(['xpath' => $xpathTextEstablishmentDocument], $textEstablishmentDocument1);
+
+        $I->scrollToElementIfNotVisible($elementButtonSave);
+        $I->click($elementButtonSave);
+
+        // TODO: insert checks for all fields and load documents from DocCest example
+
+        $I->fillField(['xpath' => $xpathTextSampleContract], $textSampleContract2);
+        $I->fillField(['xpath' => $xpathTextApprovalDocument], $textApprovalDocument2);
+        $I->fillField(['xpath' => $xpathTextDeliveryProcedure], $textDeliveryProcedure2);
+        $I->fillField(['xpath' => $xpathTextEstablishmentDocument], $textEstablishmentDocument2);
+
+
+        //$xpathTestNameForUrl1 = '//*[@id="main"]/div/form/div[1]/div[1]/input[1]';
+        //$xpathTestUrl1 = '//*[@id="main"]/div/form/div[1]/div[1]/input[2]';
+        //$xpathTestNameForUrl2 = '//*[@id="main"]/div/form/div[3]/div[1]/input[1]';
+        //$xpathTestUrl2 = '//*[@id="main"]/div/form/div[3]/div[1]/input[2]';
+        //$testUrl1 = 'https://github.com/php-webdriver/php-webdriver?tab=readme-ov-file';
+        //$testUrl2 = 'https://chat.deepseek.com/coder';
+        //$testUrl3 = 'https://www.deepl.com/ru/translator';
         
-        $listName = [$testNameForUrl1,$testNameForUrl2,$testNameForUrl3];
-        $uniqueListName = array_unique($listName);
-        Assert::assertSame(count($listName), count($uniqueListName), "Список содержит повторяющиеся значения.");
+        /*
+        данные на странице отсутствуют
+        $I->isElementNotVisible('#main > div > form > div:nth-child(3) > div.col-sm-11 > label:nth-child(1)');
+        $I->isElementNotVisible('#main > div > form > div:nth-child(3) > div.col-sm-11 > label:nth-child(4)');
+        $I->dontSee($textCommentDoc);
+        $I->dontSee($textUploadDoc)
+        */
 
-        $listUrl = [$testUrl1,$testUrl2,$testUrl3];
-        $uniqueListUrl = array_unique($listUrl);
-        Assert::assertSame(count($listUrl), count($uniqueListUrl), "Список содержит повторяющиеся значения.");
-
-
-        //данные на странице отсутствуют
-        //$I->isElementNotVisible('#main > div > form > div:nth-child(3) > div.col-sm-11 > label:nth-child(1)');
-        //$I->isElementNotVisible('#main > div > form > div:nth-child(3) > div.col-sm-11 > label:nth-child(4)');
-        //$I->dontSee($textNameForUrl);
-        //$I->dontSee($textUrl);
-
+        /*
         $I->dontSeeElement(['xpath'=>$xpathTestNameForUrl1]);
         $I->dontSeeElement(['xpath'=>$xpathTestUrl1]);
         $I->dontSeeElement(['xpath'=>$xpathTestNameForUrl2]);
@@ -107,43 +158,41 @@ class PaidEduCest
         $I->scrollToElementIfNotVisible($elementButtonSave);
         $I->click($elementButtonSave);
         $I->wait(1);
-
+        */
 
         //мы на странице и видим данные 1
-        $I->amOnPage($this->urlRoute);
         //$I->isElementVisible('#main > div > form > div:nth-child(3) > div.col-sm-11 > label:nth-child(1)');
         //$I->isElementVisible('#main > div > form > div:nth-child(3) > div.col-sm-11 > label:nth-child(4)');
 
+        /*
         $I->seeInField($xpathTestNameForUrl1,$testNameForUrl1);
         $I->seeInField($xpathTestUrl1,$testUrl1);
         //2 и 3 часть не внесена
         $I->dontSeeElement(['xpath'=>$xpathTestNameForUrl2]);
         $I->dontSeeElement(['xpath'=>$xpathTestUrl2]);
-
-        
+        */
+        /*
         //вызов формы
         $buttons = $I->grabMultiple('button#add_row');
         $I->click(['xpath' => '/html/body/main/div/form/div[3]/button']);
         //внесли данные 2
-        $I->fillField(['xpath' => $xpathTestNameForUrl2], $testNameForUrl2);
-        $I->fillField(['xpath' => $xpathTestUrl2], $testUrl2);
+        //$I->fillField(['xpath' => $xpathTestNameForUrl2], $testNameForUrl2);
+        //$I->fillField(['xpath' => $xpathTestUrl2], $testUrl2);
         $I->scrollToElementIfNotVisible($elementButtonSave);
         $I->click($elementButtonSave);
+        */
 
 
-        //мы на странице и видим данные
-        $I->amOnPage($this->urlRoute);
-        //$I->see($textNameForUrl);
-        //$I->see($textUrl);
-
+        /*
         $I->seeInField($xpathTestNameForUrl1,$testNameForUrl1);
         $I->seeInField($xpathTestUrl1,$testUrl1);
         $I->seeInField($xpathTestNameForUrl2,$testNameForUrl2);
         $I->seeInField($xpathTestUrl2,$testUrl2);
-
+        */
 
         //3 часть не внесена в поля 2
         #Assert::assertEquals('expected', 'actual');
+        /*
         $actualValue = $I->grabValueFrom(['xpath' => $xpathTestNameForUrl2]);
         Assert::assertNotEquals($actualValue,$testNameForUrl3);
         $actualValue = $I->grabValueFrom(['xpath' => $xpathTestUrl2]);
@@ -159,8 +208,8 @@ class PaidEduCest
 
         //мы на странице и видим данные 1 и 3
         $I->amOnPage($this->urlRoute);
-        //$I->see($textNameForUrl);
-        //$I->see($textUrl);
+        //$I->see($textCommentDoc);
+        //$I->see($textUploadDoc);
 
         $I->seeInField($xpathTestNameForUrl1,$testNameForUrl1);
         $I->seeInField($xpathTestUrl1,$testUrl1);
@@ -171,7 +220,7 @@ class PaidEduCest
         Assert::assertNotEquals($actualValue,$testNameForUrl2);
         $actualValue = $I->grabValueFrom(['xpath' => $xpathTestUrl2]);
         Assert::assertNotEquals($actualValue,$testUrl2);
-
+        */
     }
     //*[@id="main"]/div/form/div[1]/div[1]/input[1]
     ////div[@class="row oform_row" and @value="0"]//input[@type="text" and @name="paid_educational[0][]"]'
@@ -319,4 +368,5 @@ class PaidEduCest
         ]);
     }
     */
+    
 }

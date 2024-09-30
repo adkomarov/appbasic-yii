@@ -7,9 +7,7 @@ $this->registerJsFile('//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.
 $this->registerJsFile('@module_specialsection_js/document.js');
 $this->registerCssFile('@module_specialsection_css/styles.css')
     ?>
-<?php $assetManager = \Yii::$app->assetManager;
-        $publishedUrl = $assetManager->getPublishedUrl('@app/modules/specialsection/public');
-        echo $publishedUrl;?>
+    
 <head>
     <title>Образовательные стандарты и требования</title>
 </head>

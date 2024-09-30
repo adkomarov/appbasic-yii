@@ -16,15 +16,9 @@ $config = [
     'components' => [
         'assetManager' => [
             //$sourcePath='@module_specialsection_root';
-            'linkAssets' => true,
+            'linkAssets' => False,//true,
             //'sourcePath' => '@app/modules/specialsection/public',
             'forceCopy' => True,
-            //'/modules/specialsection/assets/AppAsset' => True,
-            'bundles' => [
-                //'sourcePath' => '@module_specialsection_root_public',
-                'forceCopy' => True,
-                '@app/modules/specialsection/assets/AppAsset' => True
-            ],
         ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation

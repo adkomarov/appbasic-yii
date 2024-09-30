@@ -8,11 +8,9 @@ use yii\web\View;
 
 class AppAsset extends AssetBundle
 {
-    public $sourcePath='@module_specialsection_root_public';
-    public $basePath = '@webroot';
-    public $baseUrl = '@web';
+    public $sourcePath='@module_specialsection_root_public';//'@app/modules/specialsection/public';
     public $css = [
-        'style.css'
+        'css/styles.css',
     ];  
     public $js = [
         //'/js/form2.js'

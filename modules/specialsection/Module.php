@@ -21,7 +21,7 @@ class Module extends \yii\base\Module implements BootstrapInterface
     {
         parent::init();
         $this->params = require __DIR__ . '/config/params.php';
-        \Yii::setAlias('@module_specialsection_root', '@app/modules/specialsection/assets');
+        \Yii::setAlias('@module_specialsection_root', '@app/modules/specialsection/public');
         \Yii::setAlias('@module_specialsection_root_public', '@app/modules/specialsection/public');
         $assetManager = \Yii::$app->assetManager;
         $publishedUrl = $assetManager->getPublishedUrl('@app/modules/specialsection/public');
