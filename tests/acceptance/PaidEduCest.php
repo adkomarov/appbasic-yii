@@ -102,6 +102,10 @@ class PaidEduCest
         $uniqueListXpath = array_unique($listXpath);
         Assert::assertSame(count($listXpath), count($uniqueListXpath), "Список содержит повторяющиеся значения.");
 
+
+        // TODO: Introduce scrolls between clicking, entering in fields, file uploads, introduce a delay for file uploads
+        //$I->scrollToElementIfNotVisible("/html/body/main/div/form/div[3]/button");
+        $I->maximizeWindow();
         $I->click(['xpath' => '/html/body/main/div/form/div[1]/button']);
         $I->click(['xpath' => '/html/body/main/div/form/div[2]/button']);
         $I->click(['xpath' => '/html/body/main/div/form/div[3]/button']);
@@ -115,15 +119,56 @@ class PaidEduCest
         $I->fillField(['xpath' => $xpathTextDeliveryProcedure], $textDeliveryProcedure1);
         $I->fillField(['xpath' => $xpathTextEstablishmentDocument], $textEstablishmentDocument1);
 
+        $I->attachFile(['xpath' => '//*[@id="File0"]'], 'test_copy_1.png');
+        $I->attachFile(['xpath' => '//*[@id="File1"]'], 'test_copy_2.png');
+        $I->attachFile(['xpath' => '//*[@id="File2"]'], 'test_copy_3.png');
+        $I->attachFile(['xpath' => '//*[@id="File3"]'], 'test_copy_4.png');
+
         $I->scrollToElementIfNotVisible($elementButtonSave);
         $I->click($elementButtonSave);
 
-        // TODO: insert checks for all fields and load documents from DocCest example
+        $I->seeInField($xpathTextSampleContract,$textSampleContract1);
+        $I->seeInField($xpathTextApprovalDocument,$textApprovalDocument1);
+        $I->seeInField($xpathTextDeliveryProcedure,$textDeliveryProcedure1);
+        $I->seeInField($xpathTextEstablishmentDocument,$textEstablishmentDocument1);
+
+        
+
 
         $I->fillField(['xpath' => $xpathTextSampleContract], $textSampleContract2);
         $I->fillField(['xpath' => $xpathTextApprovalDocument], $textApprovalDocument2);
         $I->fillField(['xpath' => $xpathTextDeliveryProcedure], $textDeliveryProcedure2);
         $I->fillField(['xpath' => $xpathTextEstablishmentDocument], $textEstablishmentDocument2);
+
+        $I->attachFile(['xpath' => '//*[@id="File0"]'], 'test_copy_5.png');
+        $I->attachFile(['xpath' => '//*[@id="File1"]'], 'test_copy_6.png');
+        $I->attachFile(['xpath' => '//*[@id="File2"]'], 'test_copy_7.png');
+        $I->attachFile(['xpath' => '//*[@id="File3"]'], 'test_copy_8.png');
+
+        $I->scrollToElementIfNotVisible($elementButtonSave);
+        $I->click($elementButtonSave);
+
+        $I->seeInField($xpathTextSampleContract,$textSampleContract2);
+        $I->seeInField($xpathTextApprovalDocument,$textApprovalDocument2);
+        $I->seeInField($xpathTextDeliveryProcedure,$textDeliveryProcedure2);
+        $I->seeInField($xpathTextEstablishmentDocument,$textEstablishmentDocument2);
+
+
+
+        /*
+        $I->click(['xpath' => '/html/body/main/div/form/div[1]/div[2]/button']);
+        $I->click(['xpath' => '/html/body/main/div/form/div[2]/div[2]/button']);
+        $I->click(['xpath' => '/html/body/main/div/form/div[3]/div[2]/button']);
+        $I->click(['xpath' => '/html/body/main/div/form/div[4]/div[2]/button']);
+
+        $I->scrollToElementIfNotVisible($elementButtonSave);
+        $I->click($elementButtonSave);
+
+        $I->dontSeeElement(['xpath'=>$xpathTextSampleContract]);
+        $I->dontSeeElement(['xpath'=>$xpathTextApprovalDocument]);
+        $I->dontSeeElement(['xpath'=>$xpathTextDeliveryProcedure]);
+        $I->dontSeeElement(['xpath'=>$xpathTextEstablishmentDocument]);
+        */
 
 
         //$xpathTestNameForUrl1 = '//*[@id="main"]/div/form/div[1]/div[1]/input[1]';
