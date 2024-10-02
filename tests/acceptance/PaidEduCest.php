@@ -63,6 +63,17 @@ class PaidEduCest
 
         $xpathTextEstablishmentDocument = '//*[@id="main"]/div/form/div[7]/div[1]/input';
         $xpathDocEstablishmentDocument = '//*[@id="File3"]';
+
+        //replace type (set selector)
+        $elementButtonAdd1 = '/html/body/main/div/form/div[1]/button';
+        $elementButtonAdd2 = '/html/body/main/div/form/div[2]/button';
+        $elementButtonAdd3 = '/html/body/main/div/form/div[3]/button';
+        $elementButtonAdd4 = '/html/body/main/div/form/div[4]/button';
+
+        $elementButtonDel1 = '/html/body/main/div/form/div[1]/div[2]/button';
+        $elementButtonDel2 = '/html/body/main/div/form/div[2]/div[2]/button';
+        $elementButtonDel3 = '/html/body/main/div/form/div[3]/div[2]/button';
+        $elementButtonDel4 = '/html/body/main/div/form/div[4]/div[2]/button';
         
         $textSampleContract1 = 'Образец договора об оказании платных образовательных услуг (версия 1)';
         $textApprovalDocument1 = 'Документ об утверждении стоимости обучения по каждой образовательной программе в виде электронного документа, подписанного электронной подписью (версия 1)';
@@ -103,74 +114,167 @@ class PaidEduCest
         Assert::assertSame(count($listXpath), count($uniqueListXpath), "Список содержит повторяющиеся значения.");
 
 
-        // TODO: Introduce scrolls between clicking, entering in fields, file uploads, introduce a delay for file uploads
-        //$I->scrollToElementIfNotVisible("/html/body/main/div/form/div[3]/button");
+
         $I->maximizeWindow();
-        $I->click(['xpath' => '/html/body/main/div/form/div[1]/button']);
-        $I->click(['xpath' => '/html/body/main/div/form/div[2]/button']);
-        $I->click(['xpath' => '/html/body/main/div/form/div[3]/button']);
-        $I->click(['xpath' => '/html/body/main/div/form/div[4]/button']);
-
-        $I->see($textCommentDoc);
-        $I->see($textUploadDoc);
-
+        //$I->scrollTo('button.btn-success[value="1"]');
+        $I->scrollToElementIfNotVisible('button.btn-success[value="1"]');
+        $I->click('button.btn-success[value="1"]');
+        //$I->scrollTo('button.btn-success[value="2"]');
+        $I->scrollToElementIfNotVisible('button.btn-success[value="2"]');
+        $I->click('button.btn-success[value="2"]');
+        $I->scrollToElementIfNotVisible('button.btn-success[value="3"]');
+        $I->click('button.btn-success[value="3"]');
+        //$I->scrollTo('button.btn-success[value="4"]');
+        $I->scrollToElementIfNotVisible('button.btn-success[value="4"]');
+        $I->click('button.btn-success[value="4"]');
+        
+        
+        $I->scrollToElementIfNotVisibleXpath($xpathTextSampleContract);
         $I->fillField(['xpath' => $xpathTextSampleContract], $textSampleContract1);
+        $I->scrollToElementIfNotVisibleXpath($xpathTextApprovalDocument);
         $I->fillField(['xpath' => $xpathTextApprovalDocument], $textApprovalDocument1);
+        $I->scrollToElementIfNotVisibleXpath($xpathTextDeliveryProcedure);
         $I->fillField(['xpath' => $xpathTextDeliveryProcedure], $textDeliveryProcedure1);
+        $I->scrollToElementIfNotVisibleXpath($xpathTextEstablishmentDocument);
         $I->fillField(['xpath' => $xpathTextEstablishmentDocument], $textEstablishmentDocument1);
 
-        $I->attachFile(['xpath' => '//*[@id="File0"]'], 'test_copy_1.png');
-        $I->attachFile(['xpath' => '//*[@id="File1"]'], 'test_copy_2.png');
-        $I->attachFile(['xpath' => '//*[@id="File2"]'], 'test_copy_3.png');
-        $I->attachFile(['xpath' => '//*[@id="File3"]'], 'test_copy_4.png');
+        $I->scrollToElementIfNotVisibleXpath($xpathDocSampleContract);
+        $I->attachFile(['xpath' => $xpathDocSampleContract], 'test_copy_1.png');
+        $I->scrollToElementIfNotVisibleXpath($xpathDocApprovalDocument);
+        $I->attachFile(['xpath' => $xpathDocApprovalDocument], 'test_copy_2.png');
+        $I->scrollToElementIfNotVisibleXpath($xpathDocDeliveryProcedure);
+        $I->attachFile(['xpath' => $xpathDocDeliveryProcedure], 'test_copy_3.png');
+        $I->scrollToElementIfNotVisibleXpath($xpathDocEstablishmentDocument);
+        $I->attachFile(['xpath' => $xpathDocEstablishmentDocument], 'test_copy_4.png');
 
         $I->scrollToElementIfNotVisible($elementButtonSave);
         $I->click($elementButtonSave);
 
+        $I->scrollToElementIfNotVisibleXpath($xpathTextSampleContract);
         $I->seeInField($xpathTextSampleContract,$textSampleContract1);
+        $I->scrollToElementIfNotVisibleXpath($xpathTextApprovalDocument);
         $I->seeInField($xpathTextApprovalDocument,$textApprovalDocument1);
+        $I->scrollToElementIfNotVisibleXpath($xpathTextDeliveryProcedure);
         $I->seeInField($xpathTextDeliveryProcedure,$textDeliveryProcedure1);
+        $I->scrollToElementIfNotVisibleXpath($xpathTextEstablishmentDocument);
         $I->seeInField($xpathTextEstablishmentDocument,$textEstablishmentDocument1);
 
         
 
 
+        $I->scrollToElementIfNotVisibleXpath($xpathTextSampleContract);
         $I->fillField(['xpath' => $xpathTextSampleContract], $textSampleContract2);
+        $I->scrollToElementIfNotVisibleXpath($xpathTextApprovalDocument);
         $I->fillField(['xpath' => $xpathTextApprovalDocument], $textApprovalDocument2);
+        $I->scrollToElementIfNotVisibleXpath($xpathTextDeliveryProcedure);
         $I->fillField(['xpath' => $xpathTextDeliveryProcedure], $textDeliveryProcedure2);
+        $I->scrollToElementIfNotVisibleXpath($xpathTextEstablishmentDocument);
         $I->fillField(['xpath' => $xpathTextEstablishmentDocument], $textEstablishmentDocument2);
 
-        $I->attachFile(['xpath' => '//*[@id="File0"]'], 'test_copy_5.png');
-        $I->attachFile(['xpath' => '//*[@id="File1"]'], 'test_copy_6.png');
-        $I->attachFile(['xpath' => '//*[@id="File2"]'], 'test_copy_7.png');
-        $I->attachFile(['xpath' => '//*[@id="File3"]'], 'test_copy_8.png');
+
+        $I->scrollToElementIfNotVisibleXpath($xpathDocSampleContract);
+        $I->attachFile(['xpath' => $xpathDocSampleContract], 'test_copy_5.png');
+        $I->scrollToElementIfNotVisibleXpath($xpathDocApprovalDocument);
+        $I->attachFile(['xpath' => $xpathDocApprovalDocument], 'test_copy_6.png');
+        $I->scrollToElementIfNotVisibleXpath($xpathDocDeliveryProcedure);
+        $I->attachFile(['xpath' => $xpathDocDeliveryProcedure], 'test_copy_7.png');
+        $I->scrollToElementIfNotVisibleXpath($xpathDocEstablishmentDocument);
+        $I->attachFile(['xpath' => $xpathDocEstablishmentDocument], 'test_copy_8.png');
 
         $I->scrollToElementIfNotVisible($elementButtonSave);
         $I->click($elementButtonSave);
 
+        $I->scrollToElementIfNotVisibleXpath($xpathTextSampleContract);
         $I->seeInField($xpathTextSampleContract,$textSampleContract2);
+        $I->scrollToElementIfNotVisibleXpath($xpathTextApprovalDocument);
         $I->seeInField($xpathTextApprovalDocument,$textApprovalDocument2);
+        $I->scrollToElementIfNotVisibleXpath($xpathTextDeliveryProcedure);
         $I->seeInField($xpathTextDeliveryProcedure,$textDeliveryProcedure2);
+        $I->scrollToElementIfNotVisibleXpath($xpathTextEstablishmentDocument);
         $I->seeInField($xpathTextEstablishmentDocument,$textEstablishmentDocument2);
+        
+
+        // TODO: deleting files, now some item is overriding the delete button.
+        /*
+        $I->scrollTo("(//button[contains(@class, 'btn') and contains(@class, 'btn-danger') and contains(@class, 'delbutton')])[2]");
+        $I->waitForElementClickable("(//button[contains(@class, 'btn') and contains(@class, 'btn-danger') and contains(@class, 'delbutton')])[2]");
+        $I->click("(//button[contains(@class, 'btn') and contains(@class, 'btn-danger') and contains(@class, 'delbutton')])[2]");
+        $I->acceptPopup();
+        */
+        /*
+        Test  tests/acceptance/PaidEduCest.php:submitValidData
+        [Facebook\WebDriver\Exception\ElementClickInterceptedException] element click intercepted: Element <button type="button" id="delrow" class="btn btn-danger delbutton" tabindex="-1" value="/delete_document">...</button> is not clickable at point (321, 19). Other element would receive the click: <a class="navbar-brand" href="/">...</a>
+        (Session info: chrome=127.0.6533.72)
+        Scenario Steps:
+        96. $I->click("(//button[contains(@class, 'btn') and contains(@class, 'btn-danger') and contains(@class, 'delbutton')])[2]") at tests/acceptance/PaidEduCest.php:208
+        95. $I->waitForElementClickable("(//button[contains(@class, 'btn') and contains(@class, 'btn-danger') and contains(@class, 'delbutton')])[2]") at tests/acceptance/PaidEduCest.php:207
+
+
+        
 
 
 
         /*
-        $I->click(['xpath' => '/html/body/main/div/form/div[1]/div[2]/button']);
-        $I->click(['xpath' => '/html/body/main/div/form/div[2]/div[2]/button']);
-        $I->click(['xpath' => '/html/body/main/div/form/div[3]/div[2]/button']);
-        $I->click(['xpath' => '/html/body/main/div/form/div[4]/div[2]/button']);
-
-        $I->scrollToElementIfNotVisible($elementButtonSave);
-        $I->click($elementButtonSave);
-
-        $I->dontSeeElement(['xpath'=>$xpathTextSampleContract]);
-        $I->dontSeeElement(['xpath'=>$xpathTextApprovalDocument]);
-        $I->dontSeeElement(['xpath'=>$xpathTextDeliveryProcedure]);
-        $I->dontSeeElement(['xpath'=>$xpathTextEstablishmentDocument]);
+        $I->scrollToElementIfNotVisibleXpath($elementButtonDel1);
+        $I->click(['xpath' => $elementButtonDel1]);
+        $I->acceptPopup();
+        $I->scrollToElementIfNotVisibleXpath($elementButtonDel2);
+        $I->click(['xpath' => $elementButtonDel2]);
+        $I->acceptPopup();
+        $I->scrollToElementIfNotVisibleXpath($elementButtonDel3);
+        $I->click(['xpath' => $elementButtonDel3]);
+        $I->acceptPopup();
+        $I->scrollToElementIfNotVisibleXpath($elementButtonDel4);
+        $I->click(['xpath' => $elementButtonDel4]);
+        $I->acceptPopup();
+        */
+        //$I->scrollTo('button.btn.btn-danger.delbutton:nth-child(2)');
+        //$I->click('button.btn.btn-danger.delbutton:nth-child(2)');
+        /*
+        $buttons = $I->grabMultiple('button#delrow');
+        $I->scrollTo($buttons[0]);
+        $I->click("(//button[contains(@class, 'btn') and contains(@class, 'btn-danger') and contains(@class, 'delbutton')])[2]");
+        //$I->click($buttons[0]);
+        */
+        //$buttons = $I->grabMultiple('button#add_row');
+        //$I->click(['css' => 'button#add_row:nth-of-type(1)']);
+        /*
+        $I->scrollTo('button.btn-success[value="1"]');//$I->scrollToElementIfNotVisibleXpath($elementButtonAdd1);
+        $I->click('button.[id = "add_row"][value="1"]');//$I->click(['xpath' => $elementButtonAdd1]);
+        $I->scrollTo('button.btn-success[value="2"]');//$I->scrollToElementIfNotVisibleXpath($elementButtonAdd2);
+        $I->click('button.btn-success[value="2"]');//$I->click($buttons[1]);//$I->click(['xpath' => $elementButtonAdd2]);
+        $I->scrollTo('button.btn-success[value="3"]');//$I->scrollToElementIfNotVisibleXpath($elementButtonAdd3);
+        $I->click('button.btn-success[value="3"]');//$I->click($buttons[2]);//$I->click(['xpath' => $elementButtonAdd3]);
+        $I->scrollTo('button.btn-success[value="4"]');//$I->scrollToElementIfNotVisibleXpath($elementButtonAdd4);
+        $I->click('button.btn-success[value="4"]');//$I->click($buttons[3]);$I->click(['xpath' => $elementButtonAdd4]);
+        $I->wait(1);
         */
 
 
+        //$I->see($textCommentDoc);
+        //$I->see($textUploadDoc);
+        // INFO: example for one of form doc
+        /*
+        $I->fillField(['xpath' => $xpathTextSampleContract], $textSampleContract1);
+        $I->attachFile(['xpath' => '//*[@id="File0"]'], 'test_copy_1.png');
+        $I->scrollToElementIfNotVisible($elementButtonSave);
+        $I->click($elementButtonSave);
+
+        $I->click(['xpath' => '/html/body/main/div/form/div[1]/div[2]/button']);
+        $I->acceptPopup();
+
+        $I->wait(1);
+        */
+
+        //$I->scrollToElementIfNotVisible($elementButtonSave);
+        //$I->click($elementButtonSave);
+
+
+        //$I->dontSeeElement(['xpath'=>$xpathTextSampleContract]);
+        //$I->dontSeeElement(['xpath'=>$xpathTextApprovalDocument]);
+        //$I->dontSeeElement(['xpath'=>$xpathTextDeliveryProcedure]);
+        //$I->dontSeeElement(['xpath'=>$xpathTextEstablishmentDocument]);
+ 
         //$xpathTestNameForUrl1 = '//*[@id="main"]/div/form/div[1]/div[1]/input[1]';
         //$xpathTestUrl1 = '//*[@id="main"]/div/form/div[1]/div[1]/input[2]';
         //$xpathTestNameForUrl2 = '//*[@id="main"]/div/form/div[3]/div[1]/input[1]';
