@@ -64,7 +64,6 @@ class PaidEduCest
         $xpathTextEstablishmentDocument = '//*[@id="main"]/div/form/div[7]/div[1]/input';
         $xpathDocEstablishmentDocument = '//*[@id="File3"]';
 
-        //replace type (set selector)
         $elementButtonAdd1 = '/html/body/main/div/form/div[1]/button';
         $elementButtonAdd2 = '/html/body/main/div/form/div[2]/button';
         $elementButtonAdd3 = '/html/body/main/div/form/div[3]/button';
@@ -116,10 +115,8 @@ class PaidEduCest
 
 
         $I->maximizeWindow();
-        //$I->scrollTo('button.btn-success[value="1"]');
         $I->scrollToElementIfNotVisible('button.btn-success[value="1"]');
         $I->click('button.btn-success[value="1"]');
-        //$I->scrollTo('button.btn-success[value="2"]');
         $I->scrollToElementIfNotVisible('button.btn-success[value="2"]');
         $I->click('button.btn-success[value="2"]');
         $I->scrollToElementIfNotVisible('button.btn-success[value="3"]');
@@ -208,9 +205,11 @@ class PaidEduCest
         Scenario Steps:
         96. $I->click("(//button[contains(@class, 'btn') and contains(@class, 'btn-danger') and contains(@class, 'delbutton')])[2]") at tests/acceptance/PaidEduCest.php:208
         95. $I->waitForElementClickable("(//button[contains(@class, 'btn') and contains(@class, 'btn-danger') and contains(@class, 'delbutton')])[2]") at tests/acceptance/PaidEduCest.php:207
+        //$I->scrollTo('button.btn-success[value="1"]');
+        //$I->scrollTo('button.btn-success[value="2"]');
+        //replace type (set selector)
 
 
-        
 
 
 
