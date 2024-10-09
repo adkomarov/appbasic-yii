@@ -11,7 +11,9 @@ $this->registerJsFile('@module_specialsection_js/budget.js');
 <head>
     <title>Финансово-хозяйственная деятельность</title>
 </head>
-
+<?php $assetManager = \Yii::$app->assetManager;
+        $publishedUrl = $assetManager->getPublishedUrl('@app/modules/specialsection/public');
+        echo $publishedUrl?>
 <body>
     <?= $this->params["MenuSectionsWidget"] ?>
     <input type="hidden" id="whatisurl" value=6>
@@ -112,7 +114,7 @@ $this->registerJsFile('@module_specialsection_js/budget.js');
                         <input type="hidden" name="document[<?php echo $count_doc ?>][]" value="<?php echo $table["position"] ?>">
                         <input type="hidden" name="document[<?php echo $count_doc ?>][]" value=45>
                         <div class="col-sm-11">
-                            <label for="document_purpose<?php echo $count_doc ?>"> Назначение докумета</label>
+                            <label for="document_purpose<?php echo $count_doc ?>"> Комментарий</label>
                             <input class="form-control" type="text" name="document[<?php echo $count_doc ?>][]"
                                 placeholder="Устав; Локальный нормативный акт, регламентирующий режим занятий обучающихся и т.д."
                                 value="<?php echo $table["titel"] ?>" required><br>
@@ -130,9 +132,7 @@ $this->registerJsFile('@module_specialsection_js/budget.js');
                                             href="<?php echo $table["data"] ?>">Ссылка на загруженный
                                             файл</a></div>
                                     <div style="margin-top:20px;"><label class="control-label"
-                                            for="File<?php echo $count_doc ?>">Заменить
-                                            загруженный
-                                            файл</label>
+                                            for="File<?php echo $count_doc ?>">Заменить загруженный файл с сохранением ссылки</label>
                                         <?php if (isset($position_wrong) && in_array($table["position"], $position_wrong)) { ?><input
                                                 type="file" id="File<?php echo $count_doc ?>" class="form-control file-loading wrong_file"
                                                 name="document[<?php echo $count_doc ?>]" accept=".jpeg,.jpg,.png,.doc,.pdf,.csv,.xls">

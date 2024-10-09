@@ -7,7 +7,6 @@ $this->registerJsFile('//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.
 $this->registerCssFile('@module_specialsection_css/styles.css');
 $this->registerJsFile('@module_specialsection_js/inter.js');
 ?>
-
 <head>
     <title>Образовательные стандарты и требования</title>
 </head>

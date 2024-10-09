@@ -79,14 +79,14 @@ $this->registerJsFile('@module_specialsection_js/document.js');
             <input type="number" name="grants[7][]">
         <?php } ?>
         <h4>Приказ об установлении стипендий</h4>
-        <?php if (!empty($tabledata)) {
+        <?php if (isset($tabledata)) {
             foreach ($tabledata as $table) {
                 if ($table["fieldsforms_id"] == 5 && $table["enabled"] == 1) { ?>
                     <div class="row oform_row temporarystyle" value=<?php echo $count_row ?>>
                         <input type="hidden" name="document[<?php echo $count_row ?>][]" value="<?php echo $table["position"] ?>">
                         <input type="hidden" name="document[<?php echo $count_row ?>][]" value=5>
                         <div class="col-sm-11">
-                            <label for="document_purpose<?php echo $count_row ?>"> Назначение докумета</label>
+                            <label for="document_purpose<?php echo $count_row ?>"> Комментарий</label>
                             <input class="form-control" type="text" name="document[<?php echo $count_row ?>][]"
                                 placeholder="Устав; Локальный нормативный акт, регламентирующий режим занятий обучающихся и т.д."
                                 value="<?php echo $table["titel"] ?>" required><br>
@@ -104,9 +104,7 @@ $this->registerJsFile('@module_specialsection_js/document.js');
                                             href="<?php echo $table["data"] ?>">Ссылка на загруженный
                                             файл</a></div>
                                     <div style="margin-top:20px;"><label class="control-label"
-                                            for="File<?php echo $count_row ?>">Заменить
-                                            загруженный
-                                            файл</label>
+                                            for="File<?php echo $count_row ?>">Заменить загруженный файл с сохранением ссылки</label>
                                         <?php if (isset($position_wrong) && in_array($table["position"], $position_wrong)) { ?><input
                                                 type="file" id="File<?php echo $count_row ?>" class="form-control file-loading wrong_file"
                                                 name="document[<?php echo $count_row ?>]" accept=".jpeg,.jpg,.png,.doc,.pdf,.csv,.xls">
@@ -148,7 +146,7 @@ $this->registerJsFile('@module_specialsection_js/document.js');
                                 value="<?php echo $table["position"] ?>">
                             <input type="hidden" name="document[<?php echo $count_row ?>][]" value=10>
                             <div class="col-sm-11">
-                                <label for="document_purpose<?php echo $count_row ?>"> Назначение докумета</label>
+                                <label for="document_purpose<?php echo $count_row ?>"> Комментарий</label>
                                 <input class="form-control" type="text" name="document[<?php echo $count_row ?>][]"
                                     placeholder="Устав; Локальный нормативный акт, регламентирующий режим занятий обучающихся и т.д."
                                     value="<?php echo $table["titel"] ?>" required><br>
@@ -166,9 +164,7 @@ $this->registerJsFile('@module_specialsection_js/document.js');
                                                 href="<?php echo $table["data"] ?>">Ссылка на загруженный
                                                 файл</a></div>
                                         <div style="margin-top:20px;"><label class="control-label"
-                                                for="File<?php echo $count_row ?>">Заменить
-                                                загруженный
-                                                файл</label>
+                                                for="File<?php echo $count_row ?>">Заменить загруженный файл с сохранением ссылки</label>
                                             <?php if (isset($position_wrong) && in_array($table["position"], $position_wrong)) { ?><input
                                                     type="file" id="File<?php echo $count_row ?>"
                                                     class="form-control file-loading wrong_file" name="document[<?php echo $count_row ?>]"

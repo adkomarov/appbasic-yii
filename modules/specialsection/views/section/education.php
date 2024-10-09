@@ -30,7 +30,7 @@ $this->registerCssFile('@module_specialsection_css/styles.css')
                         <input type="hidden" name="document[<?php echo $count_row ?>][]" value="<?php echo $table["position"] ?>">
                         <input type="hidden" name="document[<?php echo $count_row ?>][]" value=71>
                         <div class="col-sm-11">
-                            <label for="document_purpose<?php echo $count_row ?>"> Назначение докумета</label>
+                            <label for="document_purpose<?php echo $count_row ?>"> Комментарий</label>
                             <input class="form-control" type="text" name="document[<?php echo $count_row ?>][]"
                                 placeholder="Устав; Локальный нормативный акт, регламентирующий режим занятий обучающихся и т.д."
                                 value="<?php echo $table["titel"] ?>" required><br>
@@ -48,9 +48,7 @@ $this->registerCssFile('@module_specialsection_css/styles.css')
                                             href="<?php echo $table["data"] ?>">Ссылка на загруженный
                                             файл</a></div>
                                     <div style="margin-top:20px;"><label class="control-label"
-                                            for="File<?php echo $count_row ?>">Заменить
-                                            загруженный
-                                            файл</label>
+                                            for="File<?php echo $count_row ?>">Заменить загруженный файл с сохранением ссылки</label>
                                         <?php if (isset($position_wrong) && in_array($table["position"], $position_wrong)) { ?><input
                                                 type="file" id="File<?php echo $count_row ?>" class="form-control file-loading wrong_file"
                                                 name="document[<?php echo $count_row ?>]" accept=".jpeg,.jpg,.png,.doc,.pdf,.csv,.xls">
@@ -93,7 +91,7 @@ $this->registerCssFile('@module_specialsection_css/styles.css')
                                 value="<?php echo $table["position"] ?>">
                             <input type="hidden" name="document[<?php echo $count_row ?>][]" value=72>
                             <div class="col-sm-11">
-                                <label for="document_purpose<?php echo $count_row ?>"> Назначение докумета</label>
+                                <label for="document_purpose<?php echo $count_row ?>"> Комментарий</label>
                                 <input class="form-control" type="text" name="document[<?php echo $count_row ?>][]"
                                     placeholder="Устав; Локальный нормативный акт, регламентирующий режим занятий обучающихся и т.д."
                                     value="<?php echo $table["titel"] ?>" required><br>
@@ -111,9 +109,7 @@ $this->registerCssFile('@module_specialsection_css/styles.css')
                                                 href="<?php echo $table["data"] ?>">Ссылка на загруженный
                                                 файл</a></div>
                                         <div style="margin-top:20px;"><label class="control-label"
-                                                for="File<?php echo $count_row ?>">Заменить
-                                                загруженный
-                                                файл</label>
+                                                for="File<?php echo $count_row ?>">Заменить загруженный файл с сохранением ссылки</label>
                                             <?php if (isset($position_wrong) && in_array($table["position"], $position_wrong)) { ?><input
                                                     type="file" id="File<?php echo $count_row ?>"
                                                     class="form-control file-loading wrong_file" name="document[<?php echo $count_row ?>]"
@@ -156,7 +152,7 @@ $this->registerCssFile('@module_specialsection_css/styles.css')
                                     value="<?php echo $table["position"] ?>">
                                 <input type="hidden" name="document[<?php echo $count_row ?>][]" value=73>
                                 <div class="col-sm-11">
-                                    <label for="document_purpose<?php echo $count_row ?>"> Назначение докумета</label>
+                                    <label for="document_purpose<?php echo $count_row ?>"> Комментарий</label>
                                     <input class="form-control" type="text" name="document[<?php echo $count_row ?>][]"
                                         placeholder="Устав; Локальный нормативный акт, регламентирующий режим занятий обучающихся и т.д."
                                         value="<?php echo $table["titel"] ?>" required><br>
@@ -175,9 +171,7 @@ $this->registerCssFile('@module_specialsection_css/styles.css')
                                                     href="<?php echo $table["data"] ?>">Ссылка на загруженный
                                                     файл</a></div>
                                             <div style="margin-top:20px;"><label class="control-label"
-                                                    for="File<?php echo $count_row ?>">Заменить
-                                                    загруженный
-                                                    файл</label>
+                                                    for="File<?php echo $count_row ?>">Заменить загруженный файл с сохранением ссылки</label>
                                                 <?php if (isset($position_wrong) && in_array($table["position"], $position_wrong)) { ?><input
                                                         type="file" id="File<?php echo $count_row ?>"
                                                         class="form-control file-loading wrong_file"
@@ -223,7 +217,7 @@ $this->registerCssFile('@module_specialsection_css/styles.css')
                                         value="<?php echo $table["position"] ?>">
                                     <input type="hidden" name="document[<?php echo $count_row ?>][]" value=74>
                                     <div class="col-sm-11">
-                                        <label for="document_purpose<?php echo $count_row ?>"> Назначение докумета</label>
+                                        <label for="document_purpose<?php echo $count_row ?>"> Комментарий</label>
                                         <input class="form-control" type="text" name="document[<?php echo $count_row ?>][]"
                                             placeholder="Устав; Локальный нормативный акт, регламентирующий режим занятий обучающихся и т.д."
                                             value="<?php echo $table["titel"] ?>" required><br>
@@ -243,9 +237,7 @@ $this->registerCssFile('@module_specialsection_css/styles.css')
                                                         href="<?php echo $table["data"] ?>">Ссылка на загруженный
                                                         файл</a></div>
                                                 <div style="margin-top:20px;"><label class="control-label"
-                                                        for="File<?php echo $count_row ?>">Заменить
-                                                        загруженный
-                                                        файл</label>
+                                                        for="File<?php echo $count_row ?>">Заменить загруженный файл с сохранением ссылки</label>
                                                     <?php if (isset($position_wrong) && in_array($table["position"], $position_wrong)) { ?><input
                                                             type="file" id="File<?php echo $count_row ?>"
                                                             class="form-control file-loading wrong_file"

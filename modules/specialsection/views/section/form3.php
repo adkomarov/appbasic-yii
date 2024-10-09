@@ -29,8 +29,7 @@ $this->registerCssFile('@module_specialsection_css/styles.css');
                             <?php } else { ?>
                                 <div class="label_oform"><a target="_blank" href="<?php echo $table["Link"] ?>">Ссылка на загруженный
                                         файл</a></div>
-                                <div class="col-md-11"><label class="control-label" for="File<?php echo $i ?>">Заменить загруженный
-                                        файл</label><input type="hidden" name="upload_file[<?php echo $i ?>]" value=<?php echo $table["Position"] ?>><input type="file" id="File<?php echo $i ?>"
+                                <div class="col-md-11"><label class="control-label" for="File<?php echo $i ?>">Заменить загруженный файл с сохранением ссылки</label><input type="hidden" name="upload_file[<?php echo $i ?>]" value=<?php echo $table["Position"] ?>><input type="file" id="File<?php echo $i ?>"
                                         class="form-control file-loading" name="upload_file[]" multiple=""
                                         data-krajee-fileinput="fileinput_4efc2035">
                                 <?php } ?>
