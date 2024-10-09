@@ -190,6 +190,7 @@ class DocumentCest
         
 
         $I->maximizeWindow();
+        $I->executeJS("document.querySelector('.navbar').style.display = 'none';");
         //$I->scrollToElementIfNotVisible($elementButtonAdd1);//$I->scrollToElementIfNotVisibleXpath($elementButtonAdd1);
         //$I->waitForElementClickable($elementButtonAdd1);
         //$I->click($elementButtonAdd1);//$I->click(['xpath' => $elementButtonAdd1]);
@@ -214,18 +215,20 @@ class DocumentCest
             //$I->executeJS('document.evaluate("' . $button . '", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.scrollIntoView();');
             $I->scrollToElementIfNotVisibleXpath($button);
                     //$I->waitForElementClickable($button);
+            $I->wait(2);
             $I->click($button);
-            $I->wait(1);
+            $I->wait(2);
         }
-
+        $I->wait(2);
+        
         for ($i = 0; $i < count($xpathTextForms); $i++) {
             $oneOfXpathTextForms = $xpathTextForms[$i];
             $oneOftextForms = $textForms[$i];
         
             $I->scrollToElementIfNotVisibleXpath($oneOfXpathTextForms);
-            $I->wait(1);
+            $I->wait(2);
             $I->fillField(['xpath' => $oneOfXpathTextForms], $oneOftextForms);
-            $I->wait(1);
+            $I->wait(2);
         }
 
         for ($i = 0; $i < count($xpathDocForms); $i++) {
@@ -233,11 +236,11 @@ class DocumentCest
             $oneOfTestFiles = $testFiles[$i];
         
             $I->scrollToElementIfNotVisibleXpath($oneOfXpathDocForms);
-            $I->wait(1);
+            $I->wait(2);
             $I->attachFile(['xpath' => $oneOfXpathDocForms], $oneOfTestFiles);
-            $I->wait(1);
+            $I->wait(2);
         }
-        
+        $I->wait(90);
         $I->scrollToElementIfNotVisible($elementButtonSave);
         $I->waitForElementClickable($elementButtonSave);
         $I->click($elementButtonSave);
