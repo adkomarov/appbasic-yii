@@ -13,7 +13,7 @@ use \Codeception\Util\Shared\Asserts;
 
 
 
-class GrantsCest
+class CommonCest
 {
     /**
      * @var \FunctionalTester
@@ -36,7 +36,7 @@ class GrantsCest
     protected function _after(AcceptanceTester $I)
     {
     }
-    
+
     public function testCommonTextOnPage(AcceptanceTester $I)
     {
         $I->amOnPage($this->urlRoute);
@@ -46,17 +46,17 @@ class GrantsCest
     public function submitValidData(AcceptanceTester $I)
     {
         $I->amOnPage($this->urlRoute);
-        
+
         $textCommentDoc = 'Назначение докумета';
         $textUploadDoc = 'Документ для загрузки';
 
         $elementButtonSave = '#main > div > form > div.form-group > button:nth-child(1)';
 
-        $test1='Приказ об установлении стипендий';
-        
+        $test1 = 'Приказ об установлении стипендий';
+
         $I->maximizeWindow();
 
-        
+
         $I->scrollToElementIfNotVisibleXpath('/html/body/main/div/form/div[1]/div[1]/input');
         $I->fillField(['xpath' => '/html/body/main/div/form/div[1]/div[1]/input'], 'text1');
 

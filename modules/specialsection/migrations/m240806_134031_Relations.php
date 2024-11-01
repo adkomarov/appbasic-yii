@@ -5,7 +5,6 @@ use yii\db\Migration;
 
 class m240806_134031_Relations extends Migration
 {
-
     public function safeUp()
     {
         $this->addForeignKey('fk_dataforms_fieldsforms_id',

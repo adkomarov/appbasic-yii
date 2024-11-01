@@ -75,31 +75,34 @@ class GrantsCest
         $I->fillField(['xpath' => '/html/body/main/div/form/input[32]'], '12');
 
         
-        $elementButtonAdd1 = '/html/body/main/div/form/div[1]/button';
+        //$elementButtonAdd1 = '/html/body/main/div/form/div[1]/button';
         $elementTextInput1 = '/html/body/main/div/form/div[1]/div[1]/input';
         $elementFileUpload1 = '/html/body/main/div/form/div[1]/div[1]/div/input';
-        $I->scrollToElementIfNotVisible('button.btn-success[value="5"]');
-        $I->click('button.btn-success[value="5"]');
+        $I->scrollToElementIfNotVisible('button.btn-success[value="10"]');
+        $I->click('button.btn-success[value="10"]');
         $I->scrollToElementIfNotVisibleXpath($elementTextInput1);
         $I->fillField(['xpath' => $elementTextInput1], 'text1');
         $I->scrollToElementIfNotVisibleXpath($elementFileUpload1);
         $I->attachFile(['xpath' => $elementFileUpload1], 'test_copy_1.png');
+        $I->scrollToElementIfNotVisible($elementButtonSave);
+        $I->waitForElementClickable($elementButtonSave);
+        $I->click($elementButtonSave);
 
 
         $elementButtonAdd2 = '/html/body/main/div/form/div[2]/button';
-        $elementTextInput2 = '/html/body/main/div/form/div[3]/div[1]/input';
-        $elementFileUpload2 = '/html/body/main/div/form/div[3]/div[1]/div/input';
-        $I->scrollToElementIfNotVisible('button.btn-success[value="10"]');
-        $I->click('button.btn-success[value="10"]');
+        $elementTextInput2 = '/html/body/main/div/form/div[1]/div[1]/input';
+        $elementFileUpload2 = '/html/body/main/div/form/div[1]/div[1]/div/input';
+        $I->scrollToElementIfNotVisible('button.btn-success[value="5"]');
+        $I->click('button.btn-success[value="5"]');
         $I->scrollToElementIfNotVisibleXpath($elementTextInput2);
         $I->fillField(['xpath' => $elementTextInput2], 'text2');
         $I->scrollToElementIfNotVisibleXpath($elementFileUpload2);
         $I->attachFile(['xpath' => $elementFileUpload2], 'test_copy_2.png');
 
-        $I->wait(90);
         $I->scrollToElementIfNotVisible($elementButtonSave);
         $I->waitForElementClickable($elementButtonSave);
         $I->click($elementButtonSave);
+
         /*
 
         //$I->scrollToElementIfNotVisible($elementButtonAdd2);
